@@ -1,0 +1,24 @@
+{
+  "welcome": {
+    "badge": "Welcome to Notes",
+    "title": "Your thoughts,",
+    "titleAccent": "always at hand",
+    "subtitle": "A simple app for storing notes. Create, search and sort your records in a few clicks.",
+    "createBtn": "Create note"
+  },
+
+  "features": {
+    "create": {
+      "title": "Create notes",
+      "desc": "Quickly add notes with a title and description at any time."
+    },
+    "search": {
+      "title": "Smart search",
+      "desc": "Find notes instantly by title, case-insensitive."
+    },
+    "sort": {
+      "title": "Sorting",
+      "desc": "Sort by date or title in any direction."
+    }
+  }
+}
