@@ -7,7 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddScoped<NotesDbContext>();
+builder.Services.AddDbContext<NotesDbContext>();
+
 
 
 var app = builder.Build();
@@ -17,7 +18,9 @@ app.UseSwaggerUI();
 
 using var scope = app.Services.CreateScope();
 using var dbContext = scope.ServiceProvider.GetRequiredService<NotesDbContext>();
+Console.WriteLine("Подключение к базе...");
 await dbContext.Database.EnsureCreatedAsync();
+Console.WriteLine("База готова!");
 
 app.UseHttpsRedirection();
 

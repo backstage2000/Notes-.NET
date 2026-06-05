@@ -21,7 +21,7 @@ public class NotesController : ControllerBase
   [HttpPost]
   public async Task<IActionResult> Create([FromBody] CreateNoteRequest request, CancellationToken ct)
   {
-    var note = new Note(request.title, request.description);
+    var note = new Note(request.Title, request.Description);
 
     await _dbContext.Notes.AddAsync(note, ct);
     await _dbContext.SaveChangesAsync(ct);
@@ -33,7 +33,8 @@ public class NotesController : ControllerBase
   public async Task<IActionResult> Get([FromQuery] GetNotesRequest request, CancellationToken ct)
   {
     var notesQuery = _dbContext.Notes
-    .Where(n => !string.IsNullOrWhiteSpace(request.Search) && n.Title.ToLower().Contains(request.Search.ToLower()));
+    .Where(n => string.IsNullOrWhiteSpace(request.Search) ||
+     n.Title.ToLower().Contains(request.Search.ToLower()));
 
 
     Expression<Func<Note, object>> selectorKey = request.SortItem?.ToLower() switch

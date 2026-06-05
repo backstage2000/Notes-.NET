@@ -4,7 +4,7 @@ public class Note
 {
   public Note(string title, string description)
   {
-
+    Id = Guid.NewGuid();
     Title = title;
     Description = description;
     CreatedAt = DateTime.UtcNow;

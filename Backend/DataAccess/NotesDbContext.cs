@@ -10,7 +10,7 @@ public class NotesDbContext : DbContext
   {
     _configuration = configuration;
   }
-  public DbSet<Note> Notes => Set<Note>();
+  public DbSet<Note> Notes { get; set; }
 
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
