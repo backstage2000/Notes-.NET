@@ -20,5 +20,15 @@
       "title": "Sorting",
       "desc": "Sort by date or title in any direction."
     }
+  },
+  "notes": {
+    "newNote": "New note",
+    "titlePlaceholder": "Enter title",
+    "descPlaceholder": "Enter description",
+    "createBtn": "Create",
+    "filters": "Filters",
+    "searchPlaceholder": "Search notes...",
+    "sortByDate": "Sort by date",
+    "empty": "No notes yet. Create your first one!"
   }
 }

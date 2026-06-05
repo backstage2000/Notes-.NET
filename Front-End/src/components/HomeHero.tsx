@@ -54,7 +54,7 @@ const HomeHero = ({
         className="mb-16 flex flex-wrap justify-center gap-3"
       >
         <Link
-          to="/notes"
+          to="/note"
           className="flex items-center gap-2 rounded-xl bg-purple-700 px-6 py-3 text-sm font-medium transition-colors hover:bg-purple-600"
         >
           <Plus size={16} />
