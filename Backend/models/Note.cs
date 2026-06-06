@@ -10,10 +10,10 @@ public class Note
     CreatedAt = DateTime.UtcNow;
   }
 
-  public Guid Id { get; init; }
-  public string Title { get; init; }
-  public string Description { get; init; }
-  public DateTime CreatedAt { get; init; }
+  public Guid Id { get; set; }
+  public string Title { get; set; }
+  public string Description { get; set; }
+  public DateTime CreatedAt { get; set; }
 
 
 }

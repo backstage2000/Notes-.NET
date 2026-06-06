@@ -19,3 +19,9 @@ export interface CreateNoteParams {
   title: string;
   description: string;
 }
+
+export interface UpdateNoteParams {
+  id: string;
+  title: string;
+  description: string;
+}

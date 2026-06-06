@@ -18,6 +18,27 @@ public class NotesController : ControllerBase
     _dbContext = dbContext;
   }
 
+
+  [HttpPut("{id:guid}")]
+  public async Task<IActionResult> Update(
+      Guid id,
+      [FromBody] UpdateNoteRequest request,
+      CancellationToken ct)
+  {
+    var note = await _dbContext.Notes.FindAsync([id], ct);
+
+    if (note is null)
+      return NotFound();
+
+    note.Title = request.Title;
+    note.Description = request.Description;
+
+    await _dbContext.SaveChangesAsync(ct);
+
+    return Ok();
+  }
+
+
   [HttpPost]
   public async Task<IActionResult> Create([FromBody] CreateNoteRequest request, CancellationToken ct)
   {
@@ -57,3 +78,5 @@ public class NotesController : ControllerBase
     return Ok(new GetNotesResponse(noteDtos));
   }
 }
+
+
