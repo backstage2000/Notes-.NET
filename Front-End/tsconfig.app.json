@@ -26,6 +26,7 @@
       "@layouts": ["./src/layouts"],
       "@utils": ["./src/utils"],
       "@pages": ["./src/pages"],
+      "@hooks": ["./src/hooks"],
       "@components": ["./src/components"],
       "@features/*": ["./src/features/*"],
       "@lib": ["./src/lib"],

@@ -1,3 +1,3 @@
-// import "./types";
-// import "./hooks";
+import "./type";
+import "./hooks";
 // import "./validation";
