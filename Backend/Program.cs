@@ -9,6 +9,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<NotesDbContext>();
 
+builder.Services.AddCors(options =>
+{
+  options.AddDefaultPolicy(policy =>
+  {
+    policy.WithOrigins("http://localhost:5173");
+    policy.AllowAnyHeader();
+    policy.AllowAnyMethod();
+
+  });
+});
 
 
 var app = builder.Build();
@@ -25,6 +35,8 @@ Console.WriteLine("База готова!");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseCors();
 
 app.MapControllers();
 
