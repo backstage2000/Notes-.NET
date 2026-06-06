@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
   const { pathname } = useLocation();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
 
   return (
     <header className="sticky top-0 z-50 h-16 border-b border-purple-900/40 bg-purple-950/95 backdrop-blur">
@@ -16,7 +16,7 @@ export default function Header() {
           </span>
           <div className="hidden sm:block">
             <h1 className="text-[17px] font-semibold tracking-wide text-white">
-              Notes
+              {t("header.notes")}
             </h1>
           </div>
         </Link>
@@ -31,7 +31,7 @@ export default function Header() {
                   : "text-purple-200 hover:bg-purple-900/60 hover:text-white"
               }`}
           >
-            <span>HOME</span>
+            <span>{t("header.home")}</span>
           </Link>
 
           <button

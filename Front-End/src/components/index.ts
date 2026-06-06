@@ -4,3 +4,4 @@ export { default as StatsList } from "./StatsList";
 export { default as NoteSidebar } from "./NoteSidebar";
 export { default as NoteList } from "./NoteList";
 export { default as NoteCard } from "./NoteCard";
+export { default as NoteListSkeleton } from "./NoteListSkeleton";

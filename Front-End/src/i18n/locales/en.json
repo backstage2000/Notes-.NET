@@ -6,6 +6,13 @@
     "subtitle": "A simple app for storing notes. Create, search and sort your records in a few clicks.",
     "createBtn": "Create note"
   },
+  "header": {
+    "home": "HOME",
+    "notes": "NOTES"
+  },
+  "footer": {
+    "notes": "NOTES"
+  },
 
   "features": {
     "create": {
@@ -29,6 +36,9 @@
     "filters": "Filters",
     "searchPlaceholder": "Search notes...",
     "sortByDate": "Sort by date",
-    "empty": "No notes yet. Create your first one!"
+    "empty": "No notes yet. Create your first one!",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving..."
   }
 }

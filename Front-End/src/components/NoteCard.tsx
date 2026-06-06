@@ -3,14 +3,25 @@ import { motion, AnimatePresence } from "motion/react";
 import { Calendar, Pencil, Check, X, Trash2 } from "lucide-react";
 import type { Note } from "@features/Note/type";
 import { useDeleteNote, useUpdateNote } from "@features/Note/hooks";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const NoteCard = ({ note }: { note: Note }) => {
+type Props = {
+  isRedirect?: boolean;
+  note: Note;
+};
+
+const NoteCard = ({ note, isRedirect = false }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(note.title);
   const [description, setDescription] = useState(note.description);
 
   const { mutate: updateNote, isPending } = useUpdateNote();
-  const { mutate: deleteNote, isPending: isDeleting } = useDeleteNote();
+  const { mutate: deleteNote, isPending: isDeleting } = useDeleteNote({
+    isRedirect,
+  });
+
+  const { t } = useTranslation();
 
   const handleSave = () => {
     if (!title.trim()) return;
@@ -46,6 +57,7 @@ const NoteCard = ({ note }: { note: Note }) => {
             className="flex flex-col gap-3"
           >
             <input
+              data-testid="note-edit-title"
               autoFocus
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -63,15 +75,16 @@ const NoteCard = ({ note }: { note: Note }) => {
                 className="flex items-center gap-1.5 rounded-xl border border-zinc-700 px-3 py-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
               >
                 <X size={13} />
-                Отмена
+                {t("notes.cancel")}
               </button>
               <button
+                data-testid="note-save"
                 onClick={handleSave}
                 disabled={isPending || !title.trim()}
                 className="flex items-center gap-1.5 rounded-xl bg-purple-700 px-3 py-1.5 text-xs text-white hover:bg-purple-600 disabled:opacity-40 transition-colors"
               >
                 <Check size={13} />
-                {isPending ? "Сохранение..." : "Сохранить"}
+                {isPending ? t("notes.saving") : t("notes.save")}
               </button>
             </div>
           </motion.div>
@@ -84,21 +97,25 @@ const NoteCard = ({ note }: { note: Note }) => {
             transition={{ duration: 0.15 }}
           >
             <div className="mb-2 flex items-start justify-between gap-4">
-              <h3 className="text-sm font-medium leading-snug text-white">
-                {note.title}
-              </h3>
+              <Link to={`/note/${note.id}`}>
+                <h3 className="text-sm font-medium leading-snug text-white hover:text-purple-400 transition-colors cursor-pointer">
+                  {note.title}
+                </h3>
+              </Link>
               <div className="flex shrink-0 items-center gap-2">
                 <span className="mt-0.5 flex items-center gap-1 text-xs text-zinc-600">
                   <Calendar size={11} />
                   {new Date(note.createdAt).toLocaleDateString()}
                 </span>
                 <button
+                  data-testid="note-edit"
                   onClick={() => setIsEditing(true)}
                   className="text-zinc-600 hover:text-purple-400 transition-colors"
                 >
                   <Pencil size={13} />
                 </button>
                 <button
+                  data-testid="note-delete"
                   onClick={() => deleteNote(note.id)}
                   disabled={isDeleting}
                   className="text-zinc-600 hover:text-red-400 disabled:opacity-40 transition-colors"

@@ -54,6 +54,7 @@ const NoteSidebar = ({ onCreate }: NoteSidebarProps) => {
         </h2>
 
         <input
+          data-testid="note-title"
           type="text"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -62,6 +63,7 @@ const NoteSidebar = ({ onCreate }: NoteSidebarProps) => {
         />
 
         <textarea
+          data-testid="note-description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           placeholder={t("notes.descPlaceholder")}
@@ -70,6 +72,7 @@ const NoteSidebar = ({ onCreate }: NoteSidebarProps) => {
         />
 
         <motion.button
+          data-testid="note-submit"
           type="submit"
           whileTap={{ scale: 0.97 }}
           disabled={!title.trim()}
