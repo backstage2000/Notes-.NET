@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Calendar, Pencil, Check, X } from "lucide-react";
+import { Calendar, Pencil, Check, X, Trash2 } from "lucide-react";
 import type { Note } from "@features/Note/type";
-import useUpdateNote from "@features/Note/hooks/useUpdateNote";
+import { useDeleteNote, useUpdateNote } from "@features/Note/hooks";
 
 const NoteCard = ({ note }: { note: Note }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,6 +10,7 @@ const NoteCard = ({ note }: { note: Note }) => {
   const [description, setDescription] = useState(note.description);
 
   const { mutate: updateNote, isPending } = useUpdateNote();
+  const { mutate: deleteNote, isPending: isDeleting } = useDeleteNote();
 
   const handleSave = () => {
     if (!title.trim()) return;
@@ -96,6 +97,17 @@ const NoteCard = ({ note }: { note: Note }) => {
                   className="text-zinc-600 hover:text-purple-400 transition-colors"
                 >
                   <Pencil size={13} />
+                </button>
+                <button
+                  onClick={() => deleteNote(note.id)}
+                  disabled={isDeleting}
+                  className="text-zinc-600 hover:text-red-400 disabled:opacity-40 transition-colors"
+                >
+                  {isDeleting ? (
+                    <span className="h-3 w-3 rounded-full border-2 border-red-400/30 border-t-red-400 animate-spin block" />
+                  ) : (
+                    <Trash2 size={13} />
+                  )}
                 </button>
               </div>
             </div>
