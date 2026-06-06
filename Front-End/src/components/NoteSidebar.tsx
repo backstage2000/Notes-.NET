@@ -2,22 +2,20 @@ import { motion } from "motion/react";
 import { Plus, Search, Calendar, ArrowUpDown } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useNoteStore } from "@store";
+import type { UseMutateFunction } from "@tanstack/react-query";
+import type { CreateNoteParams } from "@features/Note/type";
+import { useState } from "react";
 
 interface NoteSidebarProps {
-  title: string;
-  description: string;
-  onTitleChange: (value: string) => void;
-  onDescriptionChange: (value: string) => void;
-  onCreate: () => void;
+  isLoading: boolean;
+
+  onCreate: UseMutateFunction<void, Error, CreateNoteParams, unknown>;
 }
 
-const NoteSidebar = ({
-  title,
-  description,
-  onTitleChange,
-  onDescriptionChange,
-  onCreate,
-}: NoteSidebarProps) => {
+const NoteSidebar = ({ onCreate }: NoteSidebarProps) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+
   const { t } = useTranslation();
 
   const search = useNoteStore((state) => state.search);
@@ -27,7 +25,16 @@ const NoteSidebar = ({
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onCreate();
+
+    onCreate(
+      { title, description },
+      {
+        onSuccess: () => {
+          setTitle("");
+          setDescription("");
+        },
+      },
+    );
   };
 
   return (
@@ -49,14 +56,14 @@ const NoteSidebar = ({
         <input
           type="text"
           value={title}
-          onChange={(e) => onTitleChange(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
           placeholder={t("notes.titlePlaceholder")}
           className="w-full rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none focus:border-purple-600 transition-colors"
         />
 
         <textarea
           value={description}
-          onChange={(e) => onDescriptionChange(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
           placeholder={t("notes.descPlaceholder")}
           rows={5}
           className="w-full resize-none rounded-xl border border-zinc-700 bg-zinc-800 px-4 py-2.5 text-sm text-white placeholder-zinc-500 outline-none focus:border-purple-600 transition-colors"

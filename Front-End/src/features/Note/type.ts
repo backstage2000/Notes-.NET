@@ -14,3 +14,8 @@ export interface GetNotesParams {
 export interface NotesResponse {
   notes: Note[];
 }
+
+export interface CreateNoteParams {
+  title: string;
+  description: string;
+}

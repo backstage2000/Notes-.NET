@@ -1,36 +1,13 @@
-import { useState } from "react";
 import { NoteList, NoteSidebar } from "@components";
-import type { Note } from "@features/Note/type";
-import { useGetNotes } from "@features/Note/hooks";
+import { useGetNotes, useCreateNote } from "@features/Note/hooks";
 
 const NotePage = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  // const handleCreate = () => {
-  //   if (!title.trim()) return;
-  //   const note: Note = {
-  //     id: crypto.randomUUID(),
-  //     title: title.trim(),
-  //     description: description.trim(),
-  //     createdAt: new Date(),
-  //   };
-  //   setNotes((prev) => [note, ...prev]);
-  //   setTitle("");
-  //   setDescription("");
-  // };
-
   const { data, isLoading } = useGetNotes();
+  const { mutate: createNote, isPending } = useCreateNote();
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 min-h-[70vh]">
-      <NoteSidebar
-        title={title}
-        description={description}
-        onTitleChange={setTitle}
-        onDescriptionChange={setDescription}
-        onCreate={() => {}}
-      />
+      <NoteSidebar isLoading={isPending} onCreate={createNote} />
 
       {isLoading ? (
         <NoteListSkeleton />
