@@ -115,7 +115,7 @@ GET /Notes?Search=my&SortItem=date&SortOrder=desc
 - **Motion** — animations
 - **Flowbite** — UI components
 - **Sonner** — Toaster
-- **i18n** — 
+- **i18n** —   Translations
 - **Testing**: Playwright (E2E)
 
 ##  📁Project Structure
