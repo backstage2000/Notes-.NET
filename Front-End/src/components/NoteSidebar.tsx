@@ -44,7 +44,6 @@ const NoteSidebar = ({ onCreate }: NoteSidebarProps) => {
       transition={{ duration: 0.4 }}
       className="flex flex-col gap-4 lg:w-80 shrink-0"
     >
-      {/* Create form */}
       <form
         onSubmit={handleSubmit}
         className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5 flex flex-col gap-3"
@@ -83,7 +82,6 @@ const NoteSidebar = ({ onCreate }: NoteSidebarProps) => {
         </motion.button>
       </form>
 
-      {/* Filters */}
       <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-5 flex flex-col gap-3">
         <h2 className="text-sm font-medium text-purple-300 uppercase tracking-widest">
           {t("notes.filters")}

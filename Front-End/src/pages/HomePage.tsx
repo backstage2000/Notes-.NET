@@ -24,14 +24,17 @@ const HomePage = () => {
   ];
 
   const stats = [
-    { value: "REST", label: "api" },
-    { value: "React", label: "frontend" },
-    { value: "PostgreSQL", label: "Database" },
+    { value: ".NET" },
+    { value: "React" },
+    { value: "PostgreSQL" },
+    { value: "Docker" },
+    { value: "TypeScript" },
+    { value: "Tailwind CSS" },
   ];
 
   return (
     <>
-      <div className="flex flex-col items-center py-12 text-center">
+      <div className="flex flex-col items-center  py-12 text-center">
         <HomeHero
           badge={t("welcome.badge")}
           title={t("welcome.title")}

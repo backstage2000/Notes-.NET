@@ -40,5 +40,12 @@
     "cancel": "Cancel",
     "save": "Save",
     "saving": "Saving..."
+  },
+  "toaster": {
+    "note": {
+      "created": "Note successfully created.",
+      "updated": "Note successfully updated.",
+      "deleted": "Note successfully deleted."
+    }
   }
 }
