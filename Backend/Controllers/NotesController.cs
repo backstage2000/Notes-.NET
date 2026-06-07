@@ -19,6 +19,20 @@ public class NotesController : ControllerBase
   }
 
 
+  [HttpDelete("{id:guid}")]
+  public async Task<IActionResult> Delete(Guid id, CancellationToken ct)
+  {
+    var note = await _dbContext.Notes.FindAsync([id], ct);
+
+    if (note is null)
+      return NotFound();
+
+    _dbContext.Notes.Remove(note);
+    await _dbContext.SaveChangesAsync(ct);
+
+    return Ok();
+  }
+
   [HttpPut("{id:guid}")]
   public async Task<IActionResult> Update(
       Guid id,
@@ -48,6 +62,20 @@ public class NotesController : ControllerBase
     await _dbContext.SaveChangesAsync(ct);
 
     return Ok();
+  }
+
+
+  [HttpGet("{id:guid}")]
+  public async Task<IActionResult> GetById(Guid id, CancellationToken ct)
+  {
+    var note = await _dbContext.Notes.FindAsync([id], ct);
+
+    if (note is null)
+      return NotFound();
+
+    var noteDto = new NoteDto(note.Id, note.Title, note.Description, note.CreatedAt);
+
+    return Ok(noteDto);
   }
 
   [HttpGet]
